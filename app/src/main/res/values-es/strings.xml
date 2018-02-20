@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GroupMail</string>
+
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Cerrar navigation drawer</string>
+
+    <string name="action_settings">Ajustes</string>
+    <string name="group_name">Nombre del grupo</string>
+    <string name="untitled_group">Sin título</string>
+    <string name="create_group_error">Error al crear el grupo</string>
+    <string name="new_group">Nuevo grupo</string>
+    <string name="empty_group">Grupo vacío</string>
+    <string name="add_email_error">Error al añadir el email</string>
+    <string name="main_activity_title">Grupos</string>
+    <string name="archive">Grupos archivados</string>
+    <string name="settings">Ajustes</string>
+    <string name="help_feedback"><![CDATA[Ayuda y feedback]]></string>
+
+    <plurals name="email_count">
+        <item quantity="one">%1$d email</item>
+        <item quantity="other">%1$d emails</item>
+    </plurals>
+
+    <string name="add_email">Añadir email</string>
+    <string name="email_hint">email</string>
+    <string name="no_email_compose_error">Este grupo no tiene emails</string>
+    <string name="action_compose_email">Redactar email</string>
+    <string name="groups_activity_title">Grupos</string>
+    <string name="archive_activity_title">Notas archivadas</string>
+    <string name="inigo_alonso">Iñigo Alonso</string>
+    <string name="alonsoapp_mail">alonsoapp@gmail.com</string>
+</resources>
