@@ -23,7 +23,7 @@
         <item quantity="other">%1$d emails</item>
     </plurals>
 
-    <string name="add_email">Añadir email</string>
+    <string name="add_email">Añadir email/s</string>
     <string name="email_hint">email</string>
     <string name="no_email_compose_error">Este grupo no tiene emails</string>
     <string name="action_compose_email">Redactar email</string>
@@ -31,4 +31,5 @@
     <string name="archive_activity_title">Notas archivadas</string>
     <string name="inigo_alonso">Iñigo Alonso</string>
     <string name="alonsoapp_mail">alonsoapp@gmail.com</string>
+    <string name="dialgo_add_email_subtitle">Varios emails deben ir separados por un salto de línea</string>
 </resources>

@@ -83,6 +83,10 @@ public class ContactListAdapter extends BaseAdapter {
         this.contactList.add(contact);
     }
 
+    public void addContacts(ArrayList<Contact> contacts){
+        this.contactList.addAll(contacts);
+    }
+
     static class ViewHolder {
         TextView textViewEmail;
         Button btnClear;

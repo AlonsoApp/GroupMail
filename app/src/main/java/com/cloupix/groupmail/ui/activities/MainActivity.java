@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity
         final EditTextDialog editTextDialog = new EditTextDialog();
         editTextDialog.setTitle(getString(R.string.new_group));
         editTextDialog.setHint(getString(R.string.group_name));
-        editTextDialog.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        editTextDialog.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         editTextDialog.setEditTextDialogCallbacks(new EditTextDialog.EditTextDialogCallbacks() {
             @Override
             public void onDialogSet(String name) {
