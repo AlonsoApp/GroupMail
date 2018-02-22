@@ -1,5 +1,9 @@
 package com.cloupix.groupmail.business;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -7,6 +11,11 @@ import java.util.ArrayList;
  *
  */
 public class Group {
+
+    private static final String key_groupId = "id";
+    private static final String key_name = "name";
+    private static final String key_archived = "archived";
+    private static final String key_contactList = "contactList";
 
     private long groupId;
     private String name;
@@ -33,6 +42,21 @@ public class Group {
         this.groupId = groupId;
         this.name = name;
         this.contactList = new ArrayList<>();
+    }
+
+    public Group(JSONObject jsonObject) {
+        try {
+            this.groupId = jsonObject.getLong(key_groupId);
+            this.name = jsonObject.getString(key_name);
+            this.archived = jsonObject.getBoolean(key_archived);
+            this.contactList = new ArrayList<>();
+            //TODO Refactor this
+            for (int i = 0; i < jsonObject.getJSONArray(key_contactList).length(); i++){
+                contactList.add(new Contact(jsonObject.getJSONArray(key_contactList).getJSONObject(i)));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public long getGroupId() {
@@ -82,4 +106,19 @@ public class Group {
         }
         return prev;
     }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put(key_groupId, groupId);
+        jsonObject.put(key_name, name);
+        jsonObject.put(key_archived, archived);
+        JSONArray jsonArray = new JSONArray();
+        for (Contact contact : this.contactList)
+            jsonArray.put(contact.toJson());
+        jsonObject.put(key_contactList, jsonArray);
+        return jsonObject;
+    }
+
+
 }

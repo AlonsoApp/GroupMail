@@ -55,6 +55,8 @@ public class Dao {
 
         //  Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
+        if(group.getGroupId() != -1)
+            values.put(GroupMailDbContract.Group.COLUMN_NAME_GROUP_ID, group.getGroupId());
         values.put(GroupMailDbContract.Group.COLUMN_NAME_NAME, group.getName());
         values.put(GroupMailDbContract.Group.COLUMN_NAME_ARCHIVED, group.isArchived()?1:0);
 
@@ -62,14 +64,16 @@ public class Dao {
                 SQLiteDatabase.CONFLICT_REPLACE);
     }
 
-    public long insertContact(com.cloupix.groupmail.business.Contact contact, long groupId) {
+    public long insertContact(com.cloupix.groupmail.business.Contact contact) {
         if(database==null)
             return -1;
 
         //  Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
+        if(contact.getContactId() != -1)
+            values.put(GroupMailDbContract.Contact.COLUMN_NAME_CONTACT_ID, contact.getContactId());
         values.put(GroupMailDbContract.Contact.COLUMN_NAME_EMAIL, contact.getEmail());
-        values.put(GroupMailDbContract.Contact.COLUMN_NAME_GROUP_ID, groupId);
+        values.put(GroupMailDbContract.Contact.COLUMN_NAME_GROUP_ID, contact.getGroupId());
 
         return database.insertWithOnConflict(GroupMailDbContract.Contact.TABLE_NAME, null, values,
                 SQLiteDatabase.CONFLICT_REPLACE);
@@ -344,6 +348,8 @@ public class Dao {
                 cursor.getColumnIndexOrThrow(GroupMailDbContract.Contact.COLUMN_NAME_CONTACT_ID)));
         contact.setEmail(cursor.getString(
                 cursor.getColumnIndexOrThrow(GroupMailDbContract.Contact.COLUMN_NAME_EMAIL)));
+        contact.setGroupId(cursor.getLong(
+                cursor.getColumnIndexOrThrow(GroupMailDbContract.Contact.COLUMN_NAME_GROUP_ID)));
 
         return contact;
     }

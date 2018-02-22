@@ -72,6 +72,27 @@ public class GroupLogic {
         return groupId;
     }
 
+    private void saveGroup(Group group, Dao dao){
+        ContactLogic cLogic = new ContactLogic();
+        dao.insertGroup(group);
+        for(Contact contact : group.getContactList())
+            cLogic.saveContact(contact, dao);
+    }
+
+    public void saveGroups(ArrayList<Group> groups, Context context){
+        Dao dao = new Dao(context);
+        try{
+            dao.open();
+            for(Group group : groups)
+                saveGroup(group, dao);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if(dao.isConnectionOpen())
+                dao.close();
+        }
+    }
+
     public Group getGroupById(long groupId, Context context) {
         Group group = null;
         Dao dao = new Dao(context);

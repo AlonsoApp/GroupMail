@@ -62,8 +62,8 @@ public class ContactLogic {
         try{
             dao.open();
             for(String email : aEmails){
-                Contact contact = new Contact(email);
-                long contactId = dao.insertContact(contact, groupId);
+                Contact contact = new Contact(email, groupId);
+                long contactId = dao.insertContact(contact);
                 contact.setContactId(contactId);
                 contacts.add(contact);
             }
@@ -81,7 +81,7 @@ public class ContactLogic {
         Dao dao = new Dao(context);
         try{
             dao.open();
-            emailEntityId = dao.insertContact(new Contact(email), groupId);
+            emailEntityId = dao.insertContact(new Contact(email, groupId));
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -89,6 +89,10 @@ public class ContactLogic {
                 dao.close();
         }
         return emailEntityId;
+    }
+
+    public void saveContact(Contact contact,  Dao dao){
+        dao.insertContact(contact);
     }
 
     public void deleteContactById(long emailEntityId, Context context) {
