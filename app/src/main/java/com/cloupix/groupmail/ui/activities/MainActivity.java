@@ -25,6 +25,7 @@ import com.cloupix.groupmail.R;
 import com.cloupix.groupmail.business.Group;
 import com.cloupix.groupmail.business.adapters.GroupRecyclerViewAdapter;
 import com.cloupix.groupmail.logic.GroupLogic;
+import com.cloupix.groupmail.logic.Logic;
 import com.cloupix.groupmail.ui.dialogs.EditTextDialog;
 
 import java.util.ArrayList;
@@ -133,9 +134,30 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_save_backup) {
+            saveBackup();
+        } else if (id == R.id.action_restore_backup) {
+
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveBackup(){
+        new AsyncTask<Void, Void, Boolean>(){
+
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                Logic logic = new Logic();
+                return logic.saveBackup(getApplicationContext());
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                super.onPostExecute(success);
+                Toast.makeText(getApplicationContext(), success?R.string.backup_success:R.string.backup_fail, Toast.LENGTH_SHORT).show();
+            }
+        }.execute();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

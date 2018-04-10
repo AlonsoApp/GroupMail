@@ -23,6 +23,7 @@ public class Group {
     private ArrayList<Contact> contactList;
 
     public Group() {
+        this.groupId = -1;
         this.contactList = new ArrayList<>();
     }
 
@@ -34,6 +35,7 @@ public class Group {
     }
 
     public Group(String name) {
+        this.groupId = -1;
         this.name = name;
         this.contactList = new ArrayList<>();
     }

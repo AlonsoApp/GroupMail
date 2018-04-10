@@ -57,4 +57,18 @@ public class Logic {
         GroupLogic gLogic = new GroupLogic();
         gLogic.saveGroups(groups, context);
     }
+
+    public boolean saveBackup(Context context){
+        try {
+            JSONObject jsonObject = exportDbToJson(context);
+            String str = jsonObject.toString();
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
 }
