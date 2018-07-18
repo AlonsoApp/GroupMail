@@ -11,6 +11,9 @@ import com.cloupix.groupmail.business.Group;
 import com.cloupix.groupmail.dao.Dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import de.cketti.mailto.EmailIntentBuilder;
 
 /**
  * Created by alonsoapp on 23/07/16.
@@ -120,9 +123,17 @@ public class GroupLogic {
             if(contact.hasVerifiedEmail())
                 addressList.add(contact.getEmail());
         String[] addresses = addressList.toArray(new String[0]);
+
+
+        /*
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_CC, addresses);
+        */
+
+        Intent intent = EmailIntentBuilder.from(context)
+                .bcc(Arrays.asList(addresses))
+                .build();
         //intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
