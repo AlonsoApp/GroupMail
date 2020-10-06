@@ -1,6 +1,8 @@
 package com.cloupix.groupmail.logic;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
@@ -113,11 +115,25 @@ public class GroupLogic {
         return group;
     }
 
-    public void composeEmail(ArrayList<Contact> contacts, Context context) {
+    public void composeEmail(final ArrayList<Contact> contacts, final Context context) {
         if(contacts.size()<=0) {
             Toast.makeText(context, R.string.no_email_compose_error, Toast.LENGTH_SHORT).show();
             return;
         }
+        String[] colors = {"CC", "CCO"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(R.string.dialog_compose_cc_cco_title);
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                launchCompose(contacts, context, which==0);
+            }
+        });
+        builder.show();
+    }
+
+    private void launchCompose(ArrayList<Contact> contacts, Context context, boolean isCC){
         ArrayList<String> addressList = new ArrayList<>();
         for(Contact contact : contacts)
             if(contact.hasVerifiedEmail())
@@ -131,9 +147,12 @@ public class GroupLogic {
         intent.putExtra(Intent.EXTRA_CC, addresses);
         */
 
-        Intent intent = EmailIntentBuilder.from(context)
-                .bcc(Arrays.asList(addresses))
-                .build();
+        EmailIntentBuilder builder = EmailIntentBuilder.from(context);
+        if(isCC)
+            builder.cc(Arrays.asList(addresses));
+        else
+            builder.bcc(Arrays.asList(addresses));
+        Intent intent = builder.build();
         //intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);

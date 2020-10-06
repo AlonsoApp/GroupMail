@@ -35,4 +35,6 @@
     <string name="action_save_backup">Guardar backup</string>
     <string name="action_restore_backup">Recuperar backup</string>
     <string name="backup_success">Backup successful</string>
+    <string name="backup_fail">Error: No se ha podido hacer backup</string>
+    <string name="dialog_compose_cc_cco_title">Mandar correo como</string>
 </resources>

@@ -34,4 +34,5 @@
     <string name="action_restore_backup">Restore backup</string>
     <string name="backup_success">Backup successful</string>
     <string name="backup_fail">Error: Could Not Backup</string>
+    <string name="dialog_compose_cc_cco_title">Send mail as</string>
 </resources>
